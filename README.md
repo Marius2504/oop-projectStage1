@@ -1,85 +1,53 @@
-# GSM Service Management System - Descriere Proiect C++
+# GSM Service Management System - C++ Project
 
-Acest proiect C++ implementează un sistem de gestionare a unui service GSM, cu următoarele componente principale:
+A comprehensive object-oriented C++ application designed to manage operations for a mobile device repair service. This system handles client devices, employee workflows, inventory management, and service transactions.
 
-## 🛠️ Clase Principale și Funcționalități
+## Key Features
 
-### 1. **`obiectePrimite` (Dispozitive Primite)**
-- **Scop**: Gestionează dispozitivele aduse în service pentru reparații.
-- **Atribute**:
-  - `cod` (unic, generat automat)
-  - Stare (`fix`), model, cost reparație, profit, angajat responsabil
-  - Detalii piese defecte: cost, cod, nume
-- **Funcționalități**:
-  - Constructori (cu parametri, copiere), destructor, operatori (`=`, `++`, `+`, `==`, `<<`, `>>`)
-  - Metode: `afisareData()` (calculează cost și durată estimată)
-  - Getters/Setters pentru toate câmpurile
+### Core Functionality
+- **Device Repair Tracking**  
+  Manages repair status, parts replacement history, and cost calculations for client devices
+- **Employee Management**  
+  Tracks technician workloads, salaries, and project assignments
+- **Client Profiles**  
+  Maintains customer information and repair history with loyalty program support
+- **Inventory System**  
+  Manages spare parts stock and supplier relationships
 
-### 2. **`angajati` (Angajați)**
-- **Scop**: Stochează informații despre angajații service-ului.
-- **Atribute**:
-  - Nume, prenume, ID unic, salariu, istoric salarii, proiecte
-- **Funcționalități**:
-  - Polimorfism: Metode virtuale `Afisare()` și `Citire()`
-  - Operator overloading (`++`, `*`, `-`, `==`)
-  - Metoda `afisareS()` (clasifică angajatul ca junior/senior)
+### Technical Components
 
-### 3. **`produse` (Produse Vândute/Reparate)**
-- **Scop**: Gestionează produsele vândute sau reparate (accesorii, dispozitive).
-- **Atribute**:
-  - Nume, preț, condiție, descriere, piese înlocuite
-- **Funcționalități**:
-  - Operator overloading (`++`, `+`, `*`, `[]`)
-  - Metoda `calc()` (generează reduceri posibile)
+#### Main Classes
+1. **ServiceRequest**  
+   - Unique repair tracking IDs
+   - Device diagnostics and parts replacement tracking
+   - Cost calculation algorithms
+   - Repair status workflows
 
-### 4. **`client` și `client_fidel` (Clienți)**
-- **Scop**: Gestionează informațiile clienților.
-- **Atribute**:
-  - Nume, adresă, varstă, dispozitiv adus, defect
-  - `client_fidel` adaugă discount și valoare totală cheltuită
-- **Funcționalități**:
-  - Metoda `vars()` (clasifică clientul pe categorii de vârstă)
-  - Operator overloading (`+`, `/`, `==`)
+2. **Employee**  
+   - Technician performance metrics
+   - Salary history tracking
+   - Project management system
+   - Seniority classification (Junior/Senior)
 
-### 5. **`tehnician` (Moștenire din `angajati`)**
-- **Scop**: Extinde funcționalitatea pentru tehnicieni.
-- **Atribute Adiționale**:
-  - Vechime, bonus, ierarhie
-- **Funcționalități**:
-  - Suprascriere metode virtuale de afișare/citire
+3. **Client** (with **LoyaltyClient** subclass)  
+   - Repair history tracking
+   - Device ownership records
+   - Loyalty discounts and special offers
 
-### 6. **Clase Abstracte și Interfețe**
-- **`distribuitor` (Clasă Abstractă)**:
-  - Metodă pură `afisare_promotie()`
-  - Gestionează nume și dată expirare contract
-- **`depozit` (Interfață)**:
-  - Metode virtuale `afisare_stoc()` și `afisare_marfa()`
-- **`depozitChitiala` (Implementare `depozit`)**:
-  - Gestionează cod depozit, locație, marfă
+4. **Warehouse**  
+   - Spare parts inventory management
+   - Supplier contract tracking
+   - Stock value calculations
 
-### 7. **`persoana_device` (Relație "Has-A")**
-- **Scop**: Asociază un client cu dispozitivul său primit în service.
-- **Componente**:
-  - Obiect `obiectePrimite`
-  - Obiect `client`
-  - Dată primire
+### OOP Implementation
+- **Encapsulation**: Strict access control with private members and public interfaces
+- **Inheritance**: Specialized client/employee types through class hierarchies
+- **Polymorphism**: Virtual methods for flexible inventory management
+- **Operator Overloading**: Streamlined object interactions
+- **Memory Management**: Custom destructors and copy constructors
 
-## 🔑 Caracteristici OOP
-- **Moștenire**: `tehnician` ← `angajati`, `client_fidel` ← `client`
-- **Polimorfism**: Metode virtuale în `angajati` și `client`
-- **Încapsulare**: Toate câmpurile sunt private cu getters/setters
-- **Operator Overloading**: `++`, `+`, `==`, `<<`, `>>` în multiple clase
-- **Gestionare Memorie**: Destructori cu `delete[]` pentru array-uri
-- **Static Members**: Contoare pentru ID-uri unice (`nrObiectePrimite`, `nr` la angajați)
+## System Architecture
 
-## 🚀 Funcționalități Demo (main())
-- Creare obiecte pentru teste: dispozitive, angajați, clienți
-- Demonstrație operatori: `++`, `+`, `==`
-- Utilizare compoziție (`persoana_device`)
-- Testare metode virtuale și abstracte
-
-## ⚙️ Tehnologii Utilizate
-- Standard C++11
-- Biblioteca `<string>` și `<cstring>` pentru gestionarea șirurilor
-- Alocare dinamică și pointeri
-- Funcții friend pentru operatori de I/O
+### Class Relationships
+- **Composition**: Service requests contain client/device data
+- **Inheritance Hierarchy**:
